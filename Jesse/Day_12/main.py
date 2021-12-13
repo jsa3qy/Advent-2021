@@ -61,7 +61,7 @@ def part_1():
                 path_counts += 1
             elif (node.name not in path or not node.small) and node.name != "start":
                 stack.append(path + "-" + node.name)
-            
+
     return path_counts
 
 def part_2():
