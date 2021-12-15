@@ -37,8 +37,6 @@ def is_winner(board):
         if row.count(-1) == len(row):
             return True
     
-    
-
 def process_board(num, board):
     for index1,row in enumerate(board):
         for index2,val in enumerate(row):
@@ -84,5 +82,6 @@ def part_2():
         boards = new_boards
     return -1
 
-print("Part 1: " + str(part_1()))
-print("Part 2: " + str(part_2()))
+if __name__ == "__main__":
+    print("Part 1: " + str(part_1()))
+    print("Part 2: " + str(part_2()))

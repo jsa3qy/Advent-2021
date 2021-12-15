@@ -202,5 +202,6 @@ def part_2():
 def get_intersection_k(list_of_lists):
     return list(set.intersection(*map(set,list_of_lists)))
     
-print("Part 1: " + str(part_1()))
-print("Part 2: " + str(part_2()))
+if __name__ == "__main__":
+    print("Part 1: " + str(part_1()))
+    print("Part 2: " + str(part_2()))

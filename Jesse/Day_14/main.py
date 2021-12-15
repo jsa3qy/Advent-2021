@@ -74,5 +74,6 @@ def part_2():
     
     return max_v - min_v
 
-print("Part 1: " + str(part_1()))
-print("Part 2: " + str(part_2()))
+if __name__ == "__main__":
+    print("Part 1: " + str(part_1()))
+    print("Part 2: " + str(part_2()))

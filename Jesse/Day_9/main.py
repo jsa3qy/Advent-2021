@@ -43,5 +43,6 @@ def get_basin_count(row, col, matrix, seen_matrix):
         return_val += get_basin_count(row, col + 1, matrix, seen_matrix)
         return return_val
 
-print("Part 1: " + str(part_1()))
-print("Part 2: " + str(part_2()))
+if __name__ == "__main__":
+    print("Part 1: " + str(part_1()))
+    print("Part 2: " + str(part_2()))

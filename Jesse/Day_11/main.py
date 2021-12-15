@@ -126,5 +126,6 @@ def pretty_print(lines):
         print("".join([str(char) for char in line]))
     print("\n")
 
-print("Part 1: " + str(part_1()))
-print("Part 2: " + str(part_2()))
+if __name__ == "__main__":
+    print("Part 1: " + str(part_1()))
+    print("Part 2: " + str(part_2()))

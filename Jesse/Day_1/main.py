@@ -1,4 +1,3 @@
-
 def part_1():
     lines = [int(line.strip()) for line in open("input.txt")]
     increased = 0
@@ -17,5 +16,6 @@ def part_2():
                 increased += 1
     return increased
 
-print("Part 1: " + str(part_1()))
-print("Part 2: " + str(part_2()))
+if __name__ == "__main__":
+    print("Part 1: " + str(part_1()))
+    print("Part 2: " + str(part_2()))

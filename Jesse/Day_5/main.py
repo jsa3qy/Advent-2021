@@ -59,5 +59,6 @@ def points_between(x1, y1, x2, y2):
                     points.append((x,y2 + (x - x2)))
     return points
 
-print("Part 1: " + str(part_1()))
-print("Part 2: " + str(part_2()))
+if __name__ == "__main__":
+    print("Part 1: " + str(part_1()))
+    print("Part 2: " + str(part_2()))
