@@ -1,3 +1,5 @@
+from timeit import default_timer as timer
+
 lefts = {
     "{" : "}",
     "[" : "]",
@@ -6,6 +8,7 @@ lefts = {
 }
 
 def part_1():
+    start = timer()
     points = {
     ")" : 3,
     "]" : 57,
@@ -23,9 +26,10 @@ def part_1():
                 match = stack.pop()
                 if char != lefts.get(match):
                     answer += points.get(char)
-    return answer
+    return answer, timer() - start
 
 def part_2():
+    start = timer()
     points = {
         ")" : 1,
         "]" : 2,
@@ -51,7 +55,7 @@ def part_2():
                 score *= 5
                 score += points.get(lefts.get(val))
             scores.append(score)
-    return median(scores)
+    return median(scores), timer() - start
 
 def median(lst):
     lst.sort()
@@ -60,5 +64,7 @@ def median(lst):
     return res
 
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + " in " + str(time_2))

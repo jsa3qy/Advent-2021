@@ -1,6 +1,8 @@
 import copy
+from timeit import default_timer as timer
 
 def part_1():
+    start_t = timer()
     line = open("input.txt").readline()
     line = [int(val) for val in line.split(",")]
     for i in range(80):
@@ -11,9 +13,10 @@ def part_1():
             else:
                 new_list.append(val - 1)
         line = new_list
-    return len(line)
+    return len(line), timer() - start_t
 
 def part_2():
+    start_t = timer()
     line = open("input.txt").readline()
     line = [int(val) for val in line.split(",")]
     tracker = [0]*9
@@ -31,8 +34,10 @@ def part_2():
         new_tracker[5] += tracker[6]
         new_tracker[7] += tracker[8]
         tracker = copy.copy(new_tracker)
-    return sum(tracker)
+    return sum(tracker), timer() - start_t
 
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + " in " + str(time_2))

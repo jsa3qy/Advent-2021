@@ -1,6 +1,8 @@
 import copy
+from timeit import default_timer as timer
 
 def part_1():
+    start_t = timer()
     array = [0]*12
     lines = [line.strip() for line in open("input.txt")]
     for val in lines:
@@ -20,9 +22,10 @@ def part_1():
             gamma += "1"
             epsilon += "0"
             
-    return int(gamma, 2)*int(epsilon, 2)
+    return int(gamma, 2)*int(epsilon, 2), timer() - start_t
 
 def part_2():
+    start_t = timer()
     lines = [line.strip() for line in open("input.txt")]
     lines_copy = copy.deepcopy(lines)
     cur_pos = 0
@@ -41,7 +44,7 @@ def part_2():
         
     ox = lines[0]
     co = lines_copy[0]
-    return int(ox, 2)*int(co, 2)
+    return int(ox, 2)*int(co, 2), timer() - start_t
 
 def most_common_is_one_for_position(vals, position):
     return_val = 0
@@ -75,5 +78,7 @@ def get_only_needed_vals(vals, target, position):
     return new_list
 
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + " in " + str(time_2))

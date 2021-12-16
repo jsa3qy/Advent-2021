@@ -1,4 +1,7 @@
+from timeit import default_timer as timer
+
 def part_1():
+    start = timer()
     dots = [[int(val) for val in line.strip().split(",")] for line in open("input.txt")]
     ints = [line.strip().split(" ")[-1].split("=") for line in open("instructions.txt")]
     seen = {}
@@ -19,9 +22,10 @@ def part_1():
                 seen.pop(dot_to_string(dot))
                 seen[dot_to_string(new_dot)] = 1
 
-    return len(seen)
+    return len(seen), timer() - start
 
 def part_2():
+    start = timer()
     dots = [[int(val) for val in line.strip().split(",")] for line in open("input.txt")]
     ints = [line.strip().split(" ")[-1].split("=") for line in open("instructions.txt")]
     seen = {}
@@ -43,7 +47,7 @@ def part_2():
                     seen[dot_to_string(new_dot)] = 1
         dots = [[int(val) for val in line.split(",")] for line in seen.keys()]
 
-    return build_return_val(dots)
+    return build_return_val(dots), timer() - start
 
 def dot_to_string(dot):
     return str(dot[0]) + "," + str(dot[1])
@@ -80,5 +84,7 @@ def build_return_val(dots):
     return cur_str
 
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + "\nin " + str(time_2))

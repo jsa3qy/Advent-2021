@@ -1,5 +1,7 @@
+from timeit import default_timer as timer
 
 def part_1():
+    start_t = timer()
     graph = [[0]*1000 for i in range(1000)]
     lines = [line.strip() for line in open("input.txt")]
     input_lines = []
@@ -16,9 +18,10 @@ def part_1():
                     count += 1
             graph[point[1]][point[0]] += 1
 
-    return count
+    return count, timer() - start_t
 
 def part_2():
+    start_t = timer()
     graph = [[0]*1000 for i in range(1000)]
     input_lines = [line.strip().split(" -> ") for line in open("input.txt")]
     count = 0
@@ -30,7 +33,7 @@ def part_2():
                     count += 1
             graph[point[1]][point[0]] += 1
         
-    return count
+    return count, timer() - start_t
 
 def points_between(x1, y1, x2, y2):
     x1 = int(x1)
@@ -60,5 +63,7 @@ def points_between(x1, y1, x2, y2):
     return points
 
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + " in " + str(time_2))

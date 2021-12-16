@@ -1,6 +1,8 @@
 import copy
+from timeit import default_timer as timer
 
 def part_1():
+    start_t = timer()
     called_nums = open("called.txt").readline().split(",")
     lines = [line.strip().split(" ") for line in open("input.txt")]
     board = []
@@ -17,7 +19,7 @@ def part_1():
             board = process_board(num, board)
             if is_winner(board):
                 answer = get_sum(board)
-                return answer*int(num)
+                return answer*int(num), timer() - start_t
     return -1
 
 def get_sum(board):
@@ -59,6 +61,7 @@ def transpose(matrix):
             
 
 def part_2():
+    start_t = timer()
     called_nums = open("called.txt").readline().split(",")
     lines = [line.strip().split(" ") for line in open("input.txt")]
     board = []
@@ -78,10 +81,12 @@ def part_2():
                 new_boards.append(board)
         if len(boards) == 1 and is_winner(boards[0]):
             result = get_sum(boards[0])
-            return result*int(num)
+            return result*int(num), timer() - start_t
         boards = new_boards
     return -1
 
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + " in " + str(time_2))

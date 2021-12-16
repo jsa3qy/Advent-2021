@@ -1,4 +1,7 @@
+from timeit import default_timer as timer
+
 def part_1():
+    start_t = timer()
     start = [line.strip() for line in open("starter.txt")][0]
     rules = [[rule.strip() for rule in line.strip().split("->")] for line in open("input.txt")]
     rule_map = {}
@@ -25,9 +28,10 @@ def part_1():
         if chars.count(unique) < min:
             min = chars.count(unique)
             
-    return max - min
+    return max - min, timer() - start_t
 
 def part_2():
+    start_t = timer()
     start = [line.strip() for line in open("starter.txt")][0]
     rules = [[rule.strip() for rule in line.strip().split("->")] for line in open("input.txt")]
 
@@ -49,6 +53,7 @@ def part_2():
             pair_counts[start[index:index+2]] = 1
 
     for i in range(40):
+        start = timer()
         pair_counts_new = {}
         for val in pair_counts:
             insert_val = rule_map.get(val)
@@ -72,8 +77,10 @@ def part_2():
     min_v = min(inv_map.keys())
     max_v = max(inv_map.keys())
     
-    return max_v - min_v
+    return max_v - min_v, timer() - start_t
 
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + " in " + str(time_2))

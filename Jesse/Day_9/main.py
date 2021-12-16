@@ -1,4 +1,7 @@
+from timeit import default_timer as timer
+
 def part_1():
+    start_t = timer()
     lines = [[int(char) for char in line.strip()] for line in open("input.txt")]
     lows = []
     for row in range(len(lines)):
@@ -17,9 +20,10 @@ def part_1():
                 if not lines[row][col + 1] > cur_height:
                     continue
             lows.append(cur_height)
-    return sum(lows) + len(lows)
+    return sum(lows) + len(lows), timer() - start_t
 
 def part_2():
+    start_t = timer()
     lines = [[int(char) for char in line.strip()] for line in open("input.txt")]
     seen_matrix = [[0]*len(lines[0]) for i in range(len(lines))]
     basin_counts = []
@@ -27,7 +31,7 @@ def part_2():
         for col in range(len(lines[row])):
             basin_counts.append(get_basin_count(row,col,lines,seen_matrix))
     basin_counts = sorted(basin_counts)
-    return basin_counts[len(basin_counts) - 1]*basin_counts[len(basin_counts) - 2]*basin_counts[len(basin_counts) - 3]
+    return basin_counts[len(basin_counts) - 1]*basin_counts[len(basin_counts) - 2]*basin_counts[len(basin_counts) - 3], timer() - start_t
 
 def get_basin_count(row, col, matrix, seen_matrix):
     if row < 0 or row >= len(matrix) or col < 0 or col >= len(matrix[row]):
@@ -44,5 +48,7 @@ def get_basin_count(row, col, matrix, seen_matrix):
         return return_val
 
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + " in " + str(time_2))

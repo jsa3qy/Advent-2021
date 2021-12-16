@@ -1,3 +1,5 @@
+from timeit import default_timer as timer
+
 class Graph:
     def __init__(self):
         self.name_to_node = {}
@@ -45,6 +47,7 @@ def read_and_return_graph():
     return my_graph
 
 def part_1():
+    start_t = timer()
     my_graph = read_and_return_graph()
     start = my_graph.name_to_node.get("start")
     path_counts = 0
@@ -62,9 +65,10 @@ def part_1():
             elif (node.name not in path or not node.small) and node.name != "start":
                 stack.append(path + "-" + node.name)
 
-    return path_counts
+    return path_counts, timer() - start_t
 
 def part_2():
+    start_t = timer()
     my_graph = read_and_return_graph()
     start = my_graph.name_to_node.get("start")
     path_counts = 0
@@ -82,8 +86,10 @@ def part_2():
             elif ((not has_small_twice(path, my_graph) and path.count(node.name) < 2) or (has_small_twice(path, my_graph) and path.count(node.name) < 1) or not node.small) and node.name != "start":
                 stack.append(path + "-" + node.name)
             
-    return path_counts
+    return path_counts, timer() - start_t
 
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + " in " + str(time_2))

@@ -1,6 +1,8 @@
 import copy
+from timeit import default_timer as timer
 
 def part_1():
+    start_t = timer()
     lines = [[int(char) for char in line.strip()] for line in open("input.txt")]
     flashes = 0
     for _ in range(100):
@@ -41,9 +43,10 @@ def part_1():
             flashes += line.count(0)
         lines = lines_copy 
 
-    return flashes
+    return flashes, timer() - start_t
         
 def part_2():
+    start_t = timer()
     lines = [[int(char) for char in line.strip()] for line in open("input.txt")]
     flashes = 0
     step = 0
@@ -87,7 +90,7 @@ def part_2():
             cur_flashes += line.count(0)
 
         if cur_flashes == 100:
-            return step
+            return step, timer() - start_t
         flashes += cur_flashes
         lines = lines_copy 
         
@@ -127,5 +130,7 @@ def pretty_print(lines):
     print("\n")
 
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + " in " + str(time_2))

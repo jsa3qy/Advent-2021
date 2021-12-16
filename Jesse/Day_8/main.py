@@ -1,3 +1,5 @@
+from timeit import default_timer as timer
+
 mapping = {
     2 : 1,
     4 : 4,
@@ -11,13 +13,14 @@ not_known = [0, 2, 3, 5, 6, 9]
 all = ["a","b","c","d","e","f","g"]
 
 def part_1():
+    start_t = timer()
     lines = [[val.strip().split(" ") for val in line.strip().split("|")] for line in open("input.txt")]
     count = 0
     for line in lines:
         for val in line[1]:
             if mapping.get(len(val)):
                 count += 1
-    return count
+    return count, timer() - start_t
 
 #  0000
 # 1    2
@@ -46,6 +49,7 @@ def part_1():
 #  gggg    gggg    ....    gggg    gggg
 
 def part_2():
+    start_t = timer()
     num_to_used_indices = {
         0 : [0,1,2,4,5,6],
         1 : [2,5],
@@ -197,11 +201,13 @@ def part_2():
             line_val += str(decoder["-".join(new_string)])
 
         answer += int(line_val)
-    return answer
+    return answer, timer() - start_t
 
 def get_intersection_k(list_of_lists):
     return list(set.intersection(*map(set,list_of_lists)))
     
 if __name__ == "__main__":
-    print("Part 1: " + str(part_1()))
-    print("Part 2: " + str(part_2()))
+    part_1, time_1 = part_1()
+    print("Part 1: " + str(part_1) + " in " + str(time_1))
+    part_2, time_2 = part_2()
+    print("Part 2: " + str(part_2) + " in " + str(time_2))
