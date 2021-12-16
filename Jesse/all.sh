@@ -1,8 +1,9 @@
 #!/bin/bash
 
-for d in */ ; do
-    echo "$d"
-    cd "$d"
+NUM=$(ls -l ./ | grep -c ^d)
+for i in $(seq 1 $NUM); do 
+    echo Day $i
+    cd Day_$i
     python main.py
     echo
     cd ../
