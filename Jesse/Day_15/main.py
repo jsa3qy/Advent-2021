@@ -22,21 +22,23 @@ def part_2():
 
 def mutual_helper(lines):
     N = len(lines)
-    costs= [[sys.maxint]*N for i in range(N)]
+    costs= [[sys.maxint]*N for _ in range(N)]
     costs[0][0] = lines[0][0]
     has_changed = True
     while has_changed:
         has_changed = False
-        for x in range(N):
-            for y in range(N):
-                cur_cell = (x, y)
-                cur_cells_of_interest = get_neigh_cells(cur_cell[0], cur_cell[1], N)
-                adj_costs = []
+        for y in range(N):
+            for x in range(N):
+                cur_cells_of_interest = get_neigh_cells(x, y, N)
+                min_adj_cost = sys.maxsize
                 for adj_cell in cur_cells_of_interest:
-                    adj_costs.append(costs[adj_cell[1]][adj_cell[0]])
-                before_update = costs[cur_cell[1]][cur_cell[0]]
-                costs[cur_cell[1]][cur_cell[0]] = min(min(adj_costs) + lines[cur_cell[1]][cur_cell[0]], costs[cur_cell[1]][cur_cell[0]])
-                if before_update != costs[cur_cell[1]][cur_cell[0]]:
+                    cur = costs[adj_cell[1]][adj_cell[0]]
+                    if cur < min_adj_cost:
+                        min_adj_cost = cur
+                before_update = costs[y][x]
+                after_update = min(min_adj_cost + lines[y][x], before_update)
+                costs[y][x] = after_update
+                if not has_changed and before_update != after_update:
                     has_changed = True
     return costs[N - 1][N - 1] - costs[0][0]
 
