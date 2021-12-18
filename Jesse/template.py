@@ -1,10 +1,14 @@
+from timeit import default_timer as timer
+
 def part_1():
+    start = timer()
     lines = [line.strip() for line in open("input.txt")]
-    return
+    return None, timer() - start
 
 def part_2():
+    start = timer()
     lines = [line.strip() for line in open("input.txt")]
-    return
+    return None, timer() - start
 
 if __name__ == "__main__":
     part_1, time_1 = part_1()
