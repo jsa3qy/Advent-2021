@@ -138,6 +138,24 @@ def split_next(tree, depth = 0):
             return return_node
     return None
 
+def sum_up(lists):
+    while True:
+        if not isinstance(lists[0], int) and isinstance(lists[1], int):
+            return sum_up(lists[0])*3 + lists[1]*2
+        if isinstance(lists[0], int) and not isinstance(lists[1], int):
+            return lists[0]*3 + sum_up(lists[1])*2
+        if isinstance(lists[0], int) and isinstance(lists[1], int):
+            return lists[0]*3 + lists[1]*2
+        for index,val in enumerate(lists):
+            if isinstance(val[0], int) and isinstance(val[1], int):
+                lists[index] = 3 * val[0] + 2 * val[1]
+            elif isinstance(val[0], int) and not isinstance(val[1], int):
+                lists[index] = 3 * val[0] + 2 * sum_up(val[1])
+            elif not isinstance(val[0], int) and isinstance(val[1], int):
+                lists[index] = 3 * sum_up(val[0]) + 2 * val[1]
+            else:
+                lists[index] = 3 * sum_up(val[0]) + 2 * sum_up(val[1])
+
 def part_1(piece_one, piece_two):
     start = timer()
     adjacency = [ast.literal_eval(line.strip()) for line in open("input.txt")]
@@ -167,24 +185,6 @@ def part_1(piece_one, piece_two):
             success = split_next(tree)
         
     return sum_up(ast.literal_eval(tree_to_string(tree))), timer() - start
-
-def sum_up(lists):
-    while True:
-        if not isinstance(lists[0], int) and isinstance(lists[1], int):
-            return sum_up(lists[0])*3 + lists[1]*2
-        if isinstance(lists[0], int) and not isinstance(lists[1], int):
-            return lists[0]*3 + sum_up(lists[1])*2
-        if isinstance(lists[0], int) and isinstance(lists[1], int):
-            return lists[0]*3 + lists[1]*2
-        for index,val in enumerate(lists):
-            if isinstance(val[0], int) and isinstance(val[1], int):
-                lists[index] = 3 * val[0] + 2 * val[1]
-            elif isinstance(val[0], int) and not isinstance(val[1], int):
-                lists[index] = 3 * val[0] + 2 * sum_up(val[1])
-            elif not isinstance(val[0], int) and isinstance(val[1], int):
-                lists[index] = 3 * sum_up(val[0]) + 2 * val[1]
-            else:
-                lists[index] = 3 * sum_up(val[0]) + 2 * sum_up(val[1])
                     
 def part_2():
     start = timer()
